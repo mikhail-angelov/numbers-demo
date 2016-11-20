@@ -12,6 +12,27 @@ function process(str, limit){
 	return numbers;
 }
 
+function calculateMatrix(numbers){
+	var numbers = numbers.split('');
+	var len = numbers.length * 2;
+	var column = 0;
+	var result = [];
+	for(var i =0;i<numbers.length;i++){
+		result[i] = [];
+		result[len - i - 1] = [];
+		result[i][0] = +numbers[i];
+		result[len - i - 1][0] = +numbers[i];
+	}
+	for(var i = 1;i<len;i++){
+		result[0][i] = result[i][0]
+		for(var j = 1; j<len - column; j++){
+			result[j][i] = summ(result[j][i-1], result[j-1][i]);
+		}
+		column++;
+	}
+	return result;
+}
+
 function convert(str){
 	var letters = str.split(' ').join('').split('');
 	return letters.map(letter=>toNumber(letter)).join('');
@@ -73,17 +94,21 @@ function rectPosition(dim, i, j){
 }
 
 function drawSegment(numbers, dim, renderer){
-	var size = (numbers.length - 1)*2;
+	var size = (numbers.length)*2 - 1;
 	var collumns = 0;
 	var rect;
-	for(var i=size; i>=00; i--){
+	var matrix = calculateMatrix(numbers);
+
+	for(var i=size; i>=0; i--){
 		for(var j=collumns; j>=0; j--){
 			rect = rectPosition(dim, i, j);
-			renderer(rect);
+			renderer(rect,matrix[i][j]);
 		}
 		collumns++;
 	}
 }
+
+
 
 if(typeof module !== 'undefined'){
 	module.exports = {
@@ -93,6 +118,7 @@ if(typeof module !== 'undefined'){
 		wrap,
 		extend,
 		rectPosition,
-		drawSegment
+		drawSegment,
+		calculateMatrix
 	}
 }

@@ -23,30 +23,32 @@ function onChange(){
 
 function onDraw(){
 	// draw.style.display = "block";
-	ctx.translate(200,200);
+	ctx.setTransform(1, 0, 0, 1, 0, 0);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.translate(canvas.width/2,canvas.height/2);
 	ctx.font = "12px serif";
 	drawSegment(number.textContent, DIM, renderer);
 }
 
-function renderer(rect){
+function renderer(rect, text){
 	var ALFA = Math.PI/3;
 	drawRect(rect);
-	ctx.fillText("7", rect.D.x, rect.D.y);
+	ctx.fillText(text, rect.D.x, rect.D.y);
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,'8',ALFA, {x:-DIM*3/4,y:DIM})
+	drawText(rect,text,ALFA, {x:-DIM*3/4,y:DIM})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,'7',2*ALFA, {x:-DIM,y:DIM/4})
+	drawText(rect,text,2*ALFA, {x:-DIM,y:DIM/4})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,'6',3*ALFA, {x:-DIM/2,y:-DIM/2})
+	drawText(rect,text,3*ALFA, {x:-DIM/2,y:-DIM/2})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,'5',4*ALFA, {x:DIM/4,y:-DIM/3})
+	drawText(rect,text,4*ALFA, {x:DIM/4,y:-DIM/3})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,'4',5*ALFA, {x:DIM/2,y:DIM/3})
+	drawText(rect,text,5*ALFA, {x:DIM/2,y:DIM/3})
 	ctx.rotate(ALFA);
 }
 
@@ -70,4 +72,11 @@ function drawText(rect,text,angle,fix){
 	);
  	ctx.fillText(text, rect.A.x, rect.A.y);
 	ctx.restore();
+}
+
+function printDiagram(){
+    var win=window.open();
+    win.document.write("<br><img src='"+canvas.toDataURL()+"'/>");
+    win.print();
+    win.location.reload();
 }
