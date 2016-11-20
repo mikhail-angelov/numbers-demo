@@ -32,11 +32,15 @@ function toNumber(c){
 }
 
 function summ(a,b){
-	var sum = (+a) + (+b);
-	if(sum>9){
-		return summ(sum%10, Math.floor(sum/10))
+	if((+a) >= 0 && (+b) >=0){
+		var sum = (+a) + (+b);
+		if(sum>9){
+			return summ(sum%10, Math.floor(sum/10))
+		}else{
+			return ''+sum
+		}
 	}else{
-		return ''+sum
+		return '0';
 	}
 }
 
@@ -56,12 +60,39 @@ function extend(src){
 	return numbers.join('');
 }
 
+var SQRT2D2 = Math.sqrt(2)/2+0.15; //this is hack to make it even
+function rectPosition(dim, i, j){
+	var x = dim * SQRT2D2 * i;
+	var y = dim * (j + i/2);
+	return {
+		A:{x:x,y:y},
+		B:{x:(x+dim*SQRT2D2),y:y+dim/2},
+		C:{x:(x+dim*SQRT2D2),y:y+dim*3/2},
+		D:{x:x,y:y+dim}
+	}
+}
+
+function drawSegment(numbers, dim, renderer){
+	var size = (numbers.length - 1)*2;
+	var collumns = 0;
+	var rect;
+	for(var i=size; i>=00; i--){
+		for(var j=collumns; j>=0; j--){
+			rect = rectPosition(dim, i, j);
+			renderer(rect);
+		}
+		collumns++;
+	}
+}
+
 if(typeof module !== 'undefined'){
 	module.exports = {
 		process,
 		convert,
 		toNumber,
 		wrap,
-		extend
+		extend,
+		rectPosition,
+		drawSegment
 	}
 }
