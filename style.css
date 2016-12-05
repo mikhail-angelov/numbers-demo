@@ -1,16 +1,20 @@
+.main{
+    width: 100%;
+    height: 100%;
+}
+
 .text-panel {
-  margin: 50px;
-  text-align: center;
+  float: left;
+  width: 300px;
+  margin: 20px;
 }
 
 .text {
-  width: 800px;
   font-size: 30px;
 }
 
 .number {
   font-size: 30px;
-  margin: 40px;
 }
 
 .draw-btn{
@@ -22,7 +26,6 @@
 .draw {
   display: none;
   position: relative;
-  text-align: center;
 }
 
 .draw img {
@@ -31,4 +34,15 @@
 .stub{
   position: absolute;
   top: 200px;
+}
+
+.filter{
+    border: 1px solid;
+    width: 37px;
+    text-align: center;
+    margin: 4px;
+    font-size: 30px;
+}
+.filter:hover{
+  
 }

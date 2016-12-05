@@ -22,21 +22,21 @@ function onChange(){
 }
 
 function onDraw(){
-	// draw.style.display = "block";
+	var text = number.textContent;
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.translate(canvas.width/2,canvas.height/2);
+	ctx.translate(canvas.width/2, 40*text.length);
 	ctx.font = "12px serif";
-	drawSegment(number.textContent, DIM, renderer);
+	drawSegment(text, DIM, renderer);
 }
 
 function renderer(rect, text){
 	var ALFA = Math.PI/3;
 	drawRect(rect);
-	ctx.fillText(text, rect.D.x, rect.D.y);
+	ctx.fillText(text, rect.D.x+DIM/4, rect.D.y);
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,text,ALFA, {x:-DIM*3/4,y:DIM})
+	drawText(rect,text,ALFA, {x:-DIM/2,y:DIM})
 	ctx.rotate(ALFA);
 	drawRect(rect);
 	drawText(rect,text,2*ALFA, {x:-DIM,y:DIM/4})
@@ -45,10 +45,10 @@ function renderer(rect, text){
 	drawText(rect,text,3*ALFA, {x:-DIM/2,y:-DIM/2})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,text,4*ALFA, {x:DIM/4,y:-DIM/3})
+	drawText(rect,text,4*ALFA, {x:DIM/4,y:-DIM/2})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,text,5*ALFA, {x:DIM/2,y:DIM/3})
+	drawText(rect,text,5*ALFA, {x:DIM*3/4,y:DIM/3})
 	ctx.rotate(ALFA);
 }
 
