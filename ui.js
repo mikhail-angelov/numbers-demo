@@ -5,14 +5,32 @@ var drawBtn = document.querySelector('#draw-btn');
 // var draw = document.querySelector('.draw');
 var length = document.querySelector('.length');
 var canvas = document.querySelector('#canvas');
+var filters = document.querySelectorAll('.filter');
 var ctx = canvas.getContext('2d');
 
 var DIM = 18;
+var model = {
+	filters : []
+}
 
 drawBtn.addEventListener("click", onDraw);
 input.addEventListener("keyup", onChange);
 length.addEventListener("change", onChange);
 
+filters.forEach(function(element){
+	element.addEventListener("click", onFilter);
+});
+
+function onFilter(e){
+	var index = +e.target.textContent;
+	model.filters[index] = !model.filters[index];
+	if(model.filters[index]) {
+		e.target.setAttribute('class','filter filter-selected')
+	}else{
+		e.target.setAttribute('class','filter')
+	}
+	onDraw();
+}
 
 function onChange(){
 	var text = input.value;
@@ -33,22 +51,22 @@ function onDraw(){
 function renderer(rect, text){
 	var ALFA = Math.PI/3;
 	drawRect(rect);
-	ctx.fillText(text, rect.D.x+DIM/4, rect.D.y);
+	drawText(text, rect.D.x+DIM/4, rect.D.y);
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,text,ALFA, {x:-DIM/2,y:DIM})
+	drawNumber(rect,text,ALFA, {x:-DIM/2,y:DIM})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,text,2*ALFA, {x:-DIM,y:DIM/4})
+	drawNumber(rect,text,2*ALFA, {x:-DIM,y:DIM/4})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,text,3*ALFA, {x:-DIM/2,y:-DIM/2})
+	drawNumber(rect,text,3*ALFA, {x:-DIM/2,y:-DIM/2})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,text,4*ALFA, {x:DIM/4,y:-DIM/2})
+	drawNumber(rect,text,4*ALFA, {x:DIM/4,y:-DIM/2})
 	ctx.rotate(ALFA);
 	drawRect(rect);
-	drawText(rect,text,5*ALFA, {x:DIM*3/4,y:DIM/3})
+	drawNumber(rect,text,5*ALFA, {x:DIM*3/4,y:DIM/3})
 	ctx.rotate(ALFA);
 }
 
@@ -62,7 +80,7 @@ function drawRect(rect){
 	ctx.stroke();
 }
 
-function drawText(rect,text,angle,fix){
+function drawNumber(rect,text,angle,fix){
 	ctx.save();
 	ctx.rotate(-angle);
 	ctx.translate(-rect.A.x, -rect.A.y);
@@ -70,8 +88,15 @@ function drawText(rect,text,angle,fix){
 		(rect.A.x*Math.cos(angle)-rect.A.y*Math.sin(angle) + fix.x),
 	 	(rect.A.x*Math.sin(angle)+rect.A.y*Math.cos(angle) + fix.y)
 	);
- 	ctx.fillText(text, rect.A.x, rect.A.y);
+ 	drawText(text, rect.A.x, rect.A.y);
 	ctx.restore();
+}
+
+function drawText(text, x, y){
+	var index = +text;
+	if(!model.filters[index]){
+		ctx.fillText(text, x, y);
+	}
 }
 
 function printDiagram(){

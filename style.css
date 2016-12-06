@@ -42,7 +42,11 @@
     text-align: center;
     margin: 4px;
     font-size: 30px;
+    background-color: aliceblue;
 }
 .filter:hover{
-  
+  background-color: cornflowerblue;
+}
+.filter-selected{
+  background-color: gray;
 }
