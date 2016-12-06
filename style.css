@@ -35,7 +35,10 @@
   position: absolute;
   top: 200px;
 }
-
+.tool {
+  width: 70px;
+  float: left;
+}
 .filter{
     border: 1px solid;
     width: 37px;
@@ -49,4 +52,19 @@
 }
 .filter-selected{
   background-color: gray;
+}
+
+.color{
+    border: 1px solid oldlace;
+    width: 37px;
+    text-align: center;
+    margin: 4px;
+    font-size: 30px;
+}
+
+.color:hover{
+  border: 1px solid;
+}
+.color-selected{
+  border: 1px solid;
 }
