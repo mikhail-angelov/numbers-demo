@@ -6,38 +6,24 @@
 </head>
 <body>
 
-<div class="main">
-	<div class="text-panel">
-		<input id="text" class="text" placeholder="введи текстб например: я люблю тебя жизнь" />
-		<div>
-		<select class="length">
-			<option>6</option>
-			<option>8</option>
-			<option>12</option>
-		</select>
-		</div>
-		<button class="draw-btn" id="draw-btn">Нарисуй</button>
+<div class="text-panel">
+	<input id="text" class="text" placeholder="введи текстб например: я люблю тебя жизнь" />
+	<select class="length">
+		<option>6</option>
+		<option>8</option>
+		<option>12</option>
+	</select>
+	<button class="draw-btn" id="draw-btn">Нарисуй</button>
 
-		<div class="number" id="number"></div>
-		<div class="tool">
-			<div class="filter">1</div>
-			<div class="filter">2</div>
-			<div class="filter">3</div>
-			<div class="filter">4</div>
-			<div class="filter">5</div>
-			<div class="filter">6</div>
-			<div class="filter">7</div>
-			<div class="filter">8</div>
-			<div class="filter">9</div>
-		</div>
-		<div class="tool">
-			<div class="color" style="background-color:#840d81">1</div>
-			<div class="color" style="background-color:#009C56">2</div>
-			<div class="color" style="background-color:#AF4528">3</div>
-		</div>
-	</div>
+	<div class="number" id="number"/>
+	<canvas id="canvas"/>
+</div>
 
-	<canvas id="canvas" width="1000" height="1000"></canvas>
+
+<div class="draw">
+    <!-- <polygon points=" 60,20 100,40 100,80 60,100 20,80 20,40" style="fill:cyan;stroke:red;stroke-width:1" /> -->
+    <img src="stub.jpg"/>
+    <div class="stub">Рисовалку я не сделал, может занять какое-то время, кроме того непонятно как тут цыфры расставлять</div>
 </div>
 
 <script type="text/javascript" src="ui.js"></script>
